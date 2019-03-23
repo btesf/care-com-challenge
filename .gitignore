@@ -1,1 +1,11 @@
 .DS_Store
+*.iws
+.settings
+/target/
+/out/
+.idea/
+*.iml
+classes/
+.classpath
+.project
+.slcache/
