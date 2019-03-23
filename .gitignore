@@ -5,7 +5,12 @@
 /out/
 .idea/
 *.iml
-classes/
-.classpath
 .project
 .slcache/
+.classpath
+/*Db.*
+stacktrace.log
+/*.log
+/web-app/plugins
+/*.zip
+/web-app/WEB-INF/classes
