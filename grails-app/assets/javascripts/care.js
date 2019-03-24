@@ -2,18 +2,20 @@
     $(document).ready(function () {
 
         $("button#berlinWeatherRefreshButton").click(function () {
-            $button = $(this);
+            var $button = $(this);
             //keep the original button text to replace it later
             var buttonOriginalText = $button.text();
+            $button.attr("disabled", true);
 
             var onSuccessCallBack = function(data){
-                $('#berlinTempSpan').text(data.temprature + '°');
+                createWeatherWidget("berlin_weather_widget", $button.val(), data.temprature, data.windSpeed, data.weatherIcon);
                 $button.text(buttonOriginalText);
+                $button.removeAttr("disabled");
             };
 
             var onFailCallBack = function(){
-                $('#berlinTempSpan').text('');
                 $button.text(buttonOriginalText);
+                $button.removeAttr("disabled");
             };
 
             $button.text("Loading ...");
@@ -21,18 +23,20 @@
         });
 
         $("button#walthamWeatherRefreshButton").click(function () {
-            $button = $(this);
+            var $button = $(this);
             //keep the original button text to replace it later
             var buttonOriginalText = $button.text();
+            $button.attr("disabled", true);
 
             var onSuccessCallBack = function(data){
-                $('#walthamTempSpan').text(data.temprature + '°');
+                createWeatherWidget("waltham_weather_widget", $button.val(), data.temprature, data.windSpeed, data.weatherIcon);
                 $button.text(buttonOriginalText);
+                $button.removeAttr("disabled");
             };
 
             var onFailCallBack = function(){
-                $('#walthamTempSpan').text('');
                 $button.text(buttonOriginalText);
+                $button.removeAttr("disabled");
             };
 
             $button.text("Loading ...");
@@ -40,15 +44,14 @@
         });
 
         $("#cityWeatherSearchForm").submit(function () {
-            $form = $(this);
+            var $form = $(this);
             $searchInput = $form.find(":text");
 
             var onSuccessCallBack = function(data){
-                $('#otherCitySpan').text(data.temprature + '°');
+                createWeatherWidget("other_weather_widget", $searchInput.val(), data.temprature, data.windSpeed, data.weatherIcon);
             };
 
             var onFailCallBack = function(){
-                $('#otherCitySpan').text('');
             };
 
             requestWeatherInfo($searchInput.val(), onSuccessCallBack, onFailCallBack);
@@ -87,6 +90,24 @@
                     onFailCallBack();
                 }
             });
+        }
+
+        function createWeatherWidget(target, city, temprature, windSpeed, weatherIcon){
+
+            var widgetContent = '<div class="weatherCard">' +
+                '                        <div class="currentTemp">' +
+                '                            <span class="temp">' + temprature + '&deg;</span>' +
+                '                            <span class="location">' + city + '</span>' +
+                '                        </div>' +
+                '                        <div class="currentWeather">' +
+                '                            <span class="conditions"><img src="' + weatherIcon + '"/></span>' +
+                '                            <div class="info">' +
+                '                                <span class="wind">' + windSpeed + ' KPH</span>' +
+                '                            </div>' +
+                '                        </div>' +
+                '                    </div>';
+
+            $("#" + target).replaceWith(widgetContent)
         }
 
         //fetch current temprature on load

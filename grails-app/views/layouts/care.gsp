@@ -20,6 +20,7 @@
     <link rel="stylesheet" href="${resource(dir:'css', file:'normalize.css', base: baseUrl)}"/>
     <link rel="stylesheet" href="${resource(dir:'css', file:'skeleton.css', base: baseUrl)}"/>
     <link rel="stylesheet" href="${resource(dir:'css', file:'care.css', base: baseUrl)}"/>
+    <link rel="stylesheet" href="${resource(dir:'css', file:'weatherWidget.css', base: baseUrl)}"/>
     <script type="text/javascript">
         //global variable to keep the application base url to avoid using relative paths in JS - especially useful for functional tst
         var appBaseUrl = "${g.createLink(absolute:true, uri:"/")}";
@@ -27,10 +28,13 @@
     <g:layoutHead/>
 </head>
 <body>
-    <div class="container">
-        <g:layoutBody/>
+    <div class="row">
+        <div class="two columns">&nbsp;</div>
+        <div class="eight columns">
+            <g:layoutBody/>
+        </div>
+        <div class="two columns">&nbsp;</div>
     </div>
-    <div id="spinner" class="spinner" style="display:none;"><g:message code="spinner.alt" default="Loading&hellip;"/></div>
     <asset:javascript src="notify.min.js" />
 </body>
 </html>

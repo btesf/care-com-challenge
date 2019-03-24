@@ -12,8 +12,9 @@ class OneControllerFunctionalSpec extends GebReportingSpec {
         makeRequest()
 
         then:
-        berlinWeatherResultSpan.text().contains("°");
-        walthamWeatherResultSpan.text().contains("°");
+        berlinWeatherResultDiv.text().contains("°");
+        walthamWeatherResultDiv.text().contains("°");
+        otherCitySpan.text().contains("°");
     }
 }
 
@@ -30,18 +31,27 @@ class CareChallengeIndexPage extends Page{
     static content = {
         //Berlin weather refresh button and span
         berlinWeatherRefreshButton { $("#berlinWeatherRefreshButton") }
-        berlinWeatherResultSpan { $("#berlinTempSpan") }
+        berlinWeatherResultDiv { $("#berlin_weather_widget div.weatherCard") }
+        berlinWeatherResultDiv { $("#berlin_weather_widget").children().find("div") }
         //Berlin weather refresh button
         walthamWeatherRefreshButton { $("#walthamWeatherRefreshButton") }
-        walthamWeatherResultSpan { $("#walthamTempSpan") }
+        walthamWeatherResultDiv { $("#waltham_weather_widget  div.weatherCard") }
+        //city search field
+        cityField { $("input", id: "cityNameInput") }
+        formSubmitButton { $("#cityWeatherSearchForm").children().find("button") }
+        otherCityWeatherResultDiv { $("#other_weather_widget") }
     }
 
     def makeRequest() {
         //check for Berlin weather
         berlinWeatherRefreshButton.click()
-        waitFor (30) { berlinWeatherResultSpan.text()!= DEFAULT_SPAN_CONTENT }
+        waitFor (30) { berlinWeatherResultDiv.text()!= DEFAULT_SPAN_CONTENT }
         //check for Walthum weather
         walthamWeatherRefreshButton.click()
-        waitFor (30) { walthamWeatherResultSpan.text()!= DEFAULT_SPAN_CONTENT }
+        waitFor (30) { walthamWeatherResultDiv.text()!= DEFAULT_SPAN_CONTENT }
+        //check for search city weather form submission
+        cityField.value("Addis Ababa")
+        formSubmitButton.click()
+        waitFor (30) { otherCitySpan.text()!= DEFAULT_SPAN_CONTENT }
     }
 }

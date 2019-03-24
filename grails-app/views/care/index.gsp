@@ -15,35 +15,58 @@
 <body>
     <div class="row">
         <div class="twelve columns center">
-            <h2> Weather info </h2>
+            <span class="header1"> Current Weather </span>
         </div>
     </div>
     <div class="row">
-        <div class="six columns">
-            Berlin:
-            Temprature: <span id="berlinTempSpan"></span>
-            <div>
-                <button class="button-primary" id="berlinWeatherRefreshButton" value="Berlin">Refresh</button>
+        <div class="top-margined-wrapper">
+            <div class="six columns center">
+                <div class="weather_wrapper" id="berlin_weather_widget">
+                    <div class="weatherCard">
+                        <!-- empty content at the beginning -->
+                    </div>
+                </div>
+                <br/>
+                <div>
+                    <button class="button-primary" id="berlinWeatherRefreshButton" value="Berlin">Refresh</button>
+                </div>
             </div>
-        </div>
-        <div class="six columns">
-            Waltham
-            Temprature: <span id="walthamTempSpan"></span>
-            <div>
-                <button class="button-primary" id="walthamWeatherRefreshButton" value="Waltham">Refresh</button>
+            <div class="six columns center">
+                <div class="weather_wrapper" id="waltham_weather_widget">
+                    <div class="weatherCard">
+                        <!-- empty content at the beginning -->
+                    </div>
+                </div>
+                <br/>
+                <div>
+                    <button class="button-primary" id="walthamWeatherRefreshButton" value="Waltham">Refresh</button>
+                </div>
             </div>
         </div>
     </div>
     <form id="cityWeatherSearchForm">
         <div class="row">
-            <div class="six columns">
-                <label for="cityNameInput">City</label>
-                    <input class="u-full-width" type="text" placeholder="City name (e.g. London)" id="cityNameInput">
-                <button type="submit" class="button-primary">Go</button>
-            </div>
-            <div class="six columns">
-                <h3>Search result</h3>
-                <span id="otherCitySpan"></span>
+            <div class="top-margined-wrapper">
+                <div class="one columns">&nbsp;</div>
+                <div class="ten columns center">
+                    <div class="row">
+                        <div class="twelve column">
+                            <input type="text" placeholder="City name (e.g. London)" id="cityNameInput" style="width: 60%">
+                            <button type="submit" class="button-primary">Go</button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="twelve column center">
+                            <br/>
+                            <div class="weather_wrapper" id="other_weather_widget">
+                                <div class="weatherCard">
+                                    <!-- empty content at the beginning -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="one columns">&nbsp;</div>
             </div>
         </div>
     </form>

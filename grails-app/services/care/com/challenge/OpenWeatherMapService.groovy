@@ -43,7 +43,7 @@ class OpenWeatherMapService {
 
         try {
 
-            response = client.get(path: "/weather?APPID=${apiKey}&q=${cityName}",
+            response = client.get(path: "/weather?APPID=${apiKey}&q=${cityName}&units=metric",
                     accept: ContentType.JSON,
                     headers: [:],
                     connectTimeout: 5000,
