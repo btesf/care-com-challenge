@@ -88,5 +88,9 @@
                 }
             });
         }
+
+        //fetch current temprature on load
+        $("button#berlinWeatherRefreshButton").trigger('click')
+        $("button#walthamWeatherRefreshButton").trigger('click')
     });
 })();

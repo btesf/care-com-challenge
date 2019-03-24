@@ -38,7 +38,7 @@
         <div class="row">
             <div class="six columns">
                 <label for="cityNameInput">City</label>
-                <input class="u-full-width" type="text" placeholder="City name (e.g. London)" id="cityNameInput">
+                    <input class="u-full-width" type="text" placeholder="City name (e.g. London)" id="cityNameInput">
                 <button type="submit" class="button-primary">Go</button>
             </div>
             <div class="six columns">

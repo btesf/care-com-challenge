@@ -16,5 +16,6 @@ class OpenWeatherMapServiceSpec extends Specification {
     }
 
     void "test something"() {
+
     }
 }
