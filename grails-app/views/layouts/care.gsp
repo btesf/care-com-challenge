@@ -20,7 +20,10 @@
     <link rel="stylesheet" href="${resource(dir:'css', file:'normalize.css', base: baseUrl)}"/>
     <link rel="stylesheet" href="${resource(dir:'css', file:'skeleton.css', base: baseUrl)}"/>
     <link rel="stylesheet" href="${resource(dir:'css', file:'care.css', base: baseUrl)}"/>
-    <!-- javascript and css here -->
+    <script type="text/javascript">
+        //global variable to keep the application base url to avoid using relative paths in JS - especially useful for functional tst
+        var appBaseUrl = "${g.createLink(absolute:true, uri:"/")}";
+    </script>
     <g:layoutHead/>
 </head>
 <body>

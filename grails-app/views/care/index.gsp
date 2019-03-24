@@ -9,7 +9,7 @@
 <html>
 <head>
     <meta name="layout" content="care"/>
-    <title></title>
+    <title>Care Challenge Home</title>
 
 </head>
 <body>

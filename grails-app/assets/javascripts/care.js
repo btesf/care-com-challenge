@@ -69,7 +69,7 @@
 
             $.ajax({
                 //url: 'http://api.openweathermap.org/data/2.5/weather?q=London,uk&APPID=b231606340553d9174136f7f083904b3',
-                url: 'care/fetchWeatherDataForCity?cityName='+ cityName,
+                url: appBaseUrl + 'care/fetchWeatherDataForCity?cityName='+ cityName,
                 method: 'GET',
                 success: function (data) {
                     if(data.status === true){
