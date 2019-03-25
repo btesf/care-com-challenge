@@ -65,13 +65,13 @@
                             </div>
                         </div>
                     </div>
+                    <div class="footer">
+                        <span id="highest_temperature_span"></span>
+                    </div>
                 </div>
                 <div class="one columns">&nbsp;</div>
             </div>
         </div>
     </form>
-    <script type="text/javascript">
-
-    </script>
 </body>
 </html>

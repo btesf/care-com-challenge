@@ -31,6 +31,8 @@ class OpenWeatherMapService {
         }
 
         OpenWeatherData openWeatherData = convertJsonResponseToResponseObject(jsonObject)
+        //record temperature
+        (new TemperatureRecord(cityName: cityName.toUpperCase(), temperature: openWeatherData.temprature, date: new Date())).save(flush: true)
 
         return openWeatherData
     }
@@ -104,9 +106,9 @@ class OpenWeatherMapService {
 
             JSONObject jsonChildObject = (JSONObject) jsonObject.get("main")
 
-            data.temprature = jsonChildObject.containsKey("temp") ?  jsonChildObject.get("temp") : null;
-            data.tempMin = jsonChildObject.containsKey("temp_min") ?  jsonChildObject.get("temp_min") : null;
-            data.tempMax = jsonChildObject.containsKey("temp_max") ?  jsonChildObject.get("temp_max") : null;
+            data.temprature = jsonChildObject.containsKey("temp") ?  jsonChildObject.getDouble("temp") : null;
+            data.tempMin = jsonChildObject.containsKey("temp_min") ?  jsonChildObject.getDouble("temp_min") : null;
+            data.tempMax = jsonChildObject.containsKey("temp_max") ?  jsonChildObject.getDouble("temp_max") : null;
         }
 
         if(jsonObject.containsKey("wind")) {
@@ -118,5 +120,24 @@ class OpenWeatherMapService {
         }
 
         return data;
+    }
+
+    /**
+     * if isHigh is true, method fetches the highest record temprature
+     * Otherwise, the lowest record will be returned
+     *
+     * @param isHigh
+     * @return
+     */
+    public TemperatureRecord getRecordTemprature(Boolean isHigh){
+
+        if(isHigh){
+
+            return TemperatureRecord.list(max: 1, sort: "temperature", order: "desc")?.get(0)
+
+        } else {
+
+            return TemperatureRecord.list(max: 1, sort: "temperature", order: "asc")?.get(0)
+        }
     }
 }

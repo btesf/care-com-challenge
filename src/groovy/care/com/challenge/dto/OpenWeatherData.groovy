@@ -7,9 +7,9 @@ class OpenWeatherData {
     String weatherMain
     String weatherDescription
     String weatherIcon
-    String temprature
-    String tempMin
-    String tempMax
+    Double temprature
+    Double tempMin
+    Double tempMax
     String windSpeed
     String windDegree
 

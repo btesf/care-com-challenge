@@ -11,6 +11,7 @@
                 createWeatherWidget("berlin_weather_widget", $button.val(), data.temprature, data.windSpeed, data.weatherIcon);
                 $button.text(buttonOriginalText);
                 enableButton($button, true);
+                updateHighestTemperature();
             };
 
             var onFailCallBack = function(){
@@ -32,6 +33,7 @@
                 createWeatherWidget("waltham_weather_widget", $button.val(), data.temprature, data.windSpeed, data.weatherIcon);
                 $button.text(buttonOriginalText);
                 enableButton($button, true);
+                updateHighestTemperature();
             };
 
             var onFailCallBack = function(){
@@ -52,6 +54,7 @@
             var onSuccessCallBack = function(data){
                 createWeatherWidget("other_weather_widget", $searchInput.val(), data.temprature, data.windSpeed, data.weatherIcon);
                 enableButton($goButton, true);
+                updateHighestTemperature();
             };
 
             var onFailCallBack = function(){
@@ -122,6 +125,24 @@
             } else {
                 $button.attr("disabled", true);
             }
+        }
+
+        function updateHighestTemperature(){
+
+            $.ajax({
+                url: appBaseUrl + 'care/getRecordHighTemperature',
+                method: 'GET',
+                success: function (data) {
+                    var temperatureRecord = data.data
+                    if(data.status === true){
+                        $("#highest_temperature_span").html("Record high: " + temperatureRecord.temperature + "&deg; in " + temperatureRecord.cityName)
+                    }
+                },
+                error: function(xhr, status, error){
+                    var errorMessage = xhr.status + ': ' + xhr.statusText
+                    console.log(errorMessage)
+                }
+            });
         }
 
         //fetch current temprature on load

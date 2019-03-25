@@ -51,4 +51,36 @@ class CareController {
 
         render responseData as JSON
     }
+
+    def getRecordHighTemperature(){
+
+        boolean status = false; //execution status
+        TemperatureRecord data = null
+        String responseMessage;
+
+        try{
+
+            data = openWeatherMapService.getRecordTemprature(true)
+
+            if(!data) {
+
+                responseMessage = "No record so far!"
+            }
+
+            status = true
+
+        } catch(e){
+
+            log.error(e.message, e);
+            responseMessage = e.message
+        }
+
+        def responseData = [
+                'status'  : status,
+                'data'    : data,
+                'message' : responseMessage
+        ]
+
+        render responseData as JSON
+    }
 }
