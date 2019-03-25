@@ -7,10 +7,15 @@
 }
 
 .header1{
+    margin-top:20px;
     color: rgb(255, 255, 255);
     text-align: center;
     text-transform: uppercase;
     font-weight: 700;
     font-size: 40px;
     display: block;
+}
+
+.img_60_percent_width {
+    width: 60%;
 }

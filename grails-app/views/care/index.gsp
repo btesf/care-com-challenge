@@ -22,7 +22,7 @@
         <div class="top-margined-wrapper">
             <div class="six columns center">
                 <div class="weather_wrapper" id="berlin_weather_widget">
-                    <div class="weatherCard">
+                    <div class="emptyCard">
                         <!-- empty content at the beginning -->
                     </div>
                 </div>
@@ -33,7 +33,7 @@
             </div>
             <div class="six columns center">
                 <div class="weather_wrapper" id="waltham_weather_widget">
-                    <div class="weatherCard">
+                    <div class="emptyCard">
                         <!-- empty content at the beginning -->
                     </div>
                 </div>
@@ -59,7 +59,7 @@
                         <div class="twelve column center">
                             <br/>
                             <div class="weather_wrapper" id="other_weather_widget">
-                                <div class="weatherCard">
+                                <div class="emptyCard">
                                     <!-- empty content at the beginning -->
                                 </div>
                             </div>

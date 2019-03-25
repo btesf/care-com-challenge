@@ -6,21 +6,21 @@ class OneControllerFunctionalSpec extends GebReportingSpec {
     def "test oneController index"(){
 
         given: "Go to careChallenge index page ..."
-        to CareChallengeIndexPage
+            to CareChallengeIndexPage
 
         when: "Make weather update request"
-        makeRequest()
+            makeRequest()
 
-        then:
-        berlinWeatherResultDiv.text().contains("°");
-        walthamWeatherResultDiv.text().contains("°");
-        otherCitySpan.text().contains("°");
+        then: "Temperature value with degree (&deg;) character will appear"
+            berlinWeatherResultDiv.text().contains("°");
+            walthamWeatherResultDiv.text().contains("°");
+            otherCityWeatherResultDiv.text().contains("°");
     }
 }
 
 class CareChallengeIndexPage extends Page{
 
-    private  static final DEFAULT_SPAN_CONTENT = ''
+    private  static final INITIAL_WIDGET_CONTENT = ''
 
     static url = "care/index"
 
@@ -29,14 +29,13 @@ class CareChallengeIndexPage extends Page{
     }
 
     static content = {
-        //Berlin weather refresh button and span
+        //Berlin weather refresh button result widget
         berlinWeatherRefreshButton { $("#berlinWeatherRefreshButton") }
-        berlinWeatherResultDiv { $("#berlin_weather_widget div.weatherCard") }
-        berlinWeatherResultDiv { $("#berlin_weather_widget").children().find("div") }
-        //Berlin weather refresh button
+        berlinWeatherResultDiv { $("#berlin_weather_widget") }
+        //waltham weather refresh button and result widget
         walthamWeatherRefreshButton { $("#walthamWeatherRefreshButton") }
-        walthamWeatherResultDiv { $("#waltham_weather_widget  div.weatherCard") }
-        //city search field
+        walthamWeatherResultDiv { $("#waltham_weather_widget") }
+        //Other city search field and result widget
         cityField { $("input", id: "cityNameInput") }
         formSubmitButton { $("#cityWeatherSearchForm").children().find("button") }
         otherCityWeatherResultDiv { $("#other_weather_widget") }
@@ -45,13 +44,13 @@ class CareChallengeIndexPage extends Page{
     def makeRequest() {
         //check for Berlin weather
         berlinWeatherRefreshButton.click()
-        waitFor (30) { berlinWeatherResultDiv.text()!= DEFAULT_SPAN_CONTENT }
+        waitFor (10) { berlinWeatherResultDiv.text()!= INITIAL_WIDGET_CONTENT }
         //check for Walthum weather
         walthamWeatherRefreshButton.click()
-        waitFor (30) { walthamWeatherResultDiv.text()!= DEFAULT_SPAN_CONTENT }
+        waitFor (10) { walthamWeatherResultDiv.text()!= INITIAL_WIDGET_CONTENT }
         //check for search city weather form submission
         cityField.value("Addis Ababa")
         formSubmitButton.click()
-        waitFor (30) { otherCitySpan.text()!= DEFAULT_SPAN_CONTENT }
+        waitFor (10) { otherCityWeatherResultDiv.text()!= INITIAL_WIDGET_CONTENT }
     }
 }

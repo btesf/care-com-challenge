@@ -5,17 +5,17 @@
             var $button = $(this);
             //keep the original button text to replace it later
             var buttonOriginalText = $button.text();
-            $button.attr("disabled", true);
+            enableButton($button, false);
 
             var onSuccessCallBack = function(data){
                 createWeatherWidget("berlin_weather_widget", $button.val(), data.temprature, data.windSpeed, data.weatherIcon);
                 $button.text(buttonOriginalText);
-                $button.removeAttr("disabled");
+                enableButton($button, true);
             };
 
             var onFailCallBack = function(){
                 $button.text(buttonOriginalText);
-                $button.removeAttr("disabled");
+                enableButton($button, true);
             };
 
             $button.text("Loading ...");
@@ -26,17 +26,17 @@
             var $button = $(this);
             //keep the original button text to replace it later
             var buttonOriginalText = $button.text();
-            $button.attr("disabled", true);
+            enableButton($button, false);
 
             var onSuccessCallBack = function(data){
                 createWeatherWidget("waltham_weather_widget", $button.val(), data.temprature, data.windSpeed, data.weatherIcon);
                 $button.text(buttonOriginalText);
-                $button.removeAttr("disabled");
+                enableButton($button, true);
             };
 
             var onFailCallBack = function(){
                 $button.text(buttonOriginalText);
-                $button.removeAttr("disabled");
+                enableButton($button, true);
             };
 
             $button.text("Loading ...");
@@ -45,13 +45,18 @@
 
         $("#cityWeatherSearchForm").submit(function () {
             var $form = $(this);
-            $searchInput = $form.find(":text");
+            var $searchInput = $form.find(":text");
+            var $goButton = $form.find("button");
+            enableButton($goButton, false);
 
             var onSuccessCallBack = function(data){
                 createWeatherWidget("other_weather_widget", $searchInput.val(), data.temprature, data.windSpeed, data.weatherIcon);
+                enableButton($goButton, true);
             };
 
             var onFailCallBack = function(){
+                enableButton($goButton, true);
+                $("#other_weather_widget").html("<!-- city not found -->")
             };
 
             requestWeatherInfo($searchInput.val(), onSuccessCallBack, onFailCallBack);
@@ -100,14 +105,23 @@
                 '                            <span class="location">' + city + '</span>' +
                 '                        </div>' +
                 '                        <div class="currentWeather">' +
-                '                            <span class="conditions"><img src="' + weatherIcon + '"/></span>' +
+                '                            <span class="conditions"><img src="' + weatherIcon + '" class="img_60_percent_width"/></span>' +
                 '                            <div class="info">' +
                 '                                <span class="wind">' + windSpeed + ' KPH</span>' +
                 '                            </div>' +
                 '                        </div>' +
                 '                    </div>';
 
-            $("#" + target).replaceWith(widgetContent)
+            $("#" + target).html(widgetContent)
+        }
+
+        function enableButton($button, isEnabled){
+
+            if(isEnabled){
+                $button.removeAttr("disabled");
+            } else {
+                $button.attr("disabled", true);
+            }
         }
 
         //fetch current temprature on load
