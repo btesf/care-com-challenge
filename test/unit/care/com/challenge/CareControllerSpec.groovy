@@ -39,11 +39,11 @@ class CareControllerSpec extends Specification {
         then:
 
             response.json.status == status
-            response.json.data.temprature == expectedTemprature
+            response.json.data.temprature.equals(expectedTemprature)
 
         where:
         cityName        | status | expectedTemprature | weatherData
-        "Berlin"        | true   | '213'              | new OpenWeatherData('statusCode' : 200, 'temprature' : '213')
-        "Unknown City"  | false  | ''                 | new OpenWeatherData('statusCode' : 404, 'temprature' : '')
+        "Berlin"        | true   | 213d               | new OpenWeatherData('statusCode' : 200, 'temprature' : 213d)
+        "Unknown City"  | false  | null               | new OpenWeatherData('statusCode' : 404, 'temprature' : null)
     }
 }
