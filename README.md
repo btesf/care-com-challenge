@@ -1,4 +1,4 @@
-# care-com-challenge
+# challenge
 This is a grails 2.4 application to solve a problem defined in the README.pdf.
 
 It gets information from openweathermap.org and displays current weather of selected cities.
